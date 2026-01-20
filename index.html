@@ -3,684 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Eman - Free Fire Official Portfolio</title>
+    <title>Kuashu Army - Mr Saqib Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;900&display=swap');
         
-        :root {
-            --ff-orange: #f97316;
-            --ff-yellow: #facc15;
-            --ff-purple: #9333ea;
-            --ff-blue: #2563eb;
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #000; color: white;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            background: #000;
-            color: white;
-            min-height: 100vh;
-        }
+        .bebas { font-family: 'Bebas Neue', cursive; }
 
         .bg-animate {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(-45deg, #4b0082, #00008b, #00ced1, #ff00ff, #0f172a);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease-in-out infinite;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 30%, #422006 0%, #000000 100%);
             z-index: -1;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(250, 204, 21, 0.1);
         }
 
-        .ff-font {
-            font-family: 'Bebas+Neue', cursive;
-            letter-spacing: 2px;
+        .promo-popup {
+            position: fixed; bottom: 15px; left: 15px; right: 15px;
+            z-index: 1000; transform: translateY(200%);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            pointer-events: none;
         }
-
-        .profile-container {
-            position: relative;
-            margin-top: -70px;
-            z-index: 10;
+        @media (min-width: 640px) {
+            .promo-popup { right: auto; width: 350px; }
         }
+        .promo-popup.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
 
-        .profile-img-wrapper {
-            position: relative;
+        .btn-gradient {
+            background: linear-gradient(90deg, #facc15, #eab308);
+            color: #000;
+            transition: 0.3s;
+        }
+        .btn-gradient:active { transform: scale(0.95); }
+
+        /* YouTube Subscribe Modal Button - Red Color */
+        .btn-youtube-red {
+            background: #ff0000;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+        .btn-youtube-red:active { transform: scale(0.95); }
+
+        .rgb-ring {
             padding: 3px;
+            background: linear-gradient(45deg, #facc15, #fbbf24, #f59e0b, #facc15);
+            background-size: 200% 200%;
+            animation: moveGradient 3s linear infinite;
             border-radius: 50%;
-            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400%;
-            animation: moveGradient 8s linear infinite;
         }
-
         @keyframes moveGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        .profile-img-circle {
-            width: 130px;
-            height: 130px;
-            border: 3px solid #000;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: #0f172a;
-        }
-        
-        @media (min-width: 640px) {
-            .profile-img-circle {
-                width: 170px;
-                height: 170px;
-            }
-        }
-
-        .glass-card {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-        }
-
-        .ff-gradient {
-            background: linear-gradient(135deg, #fff 0%, #facc15 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn-ff {
-            background: linear-gradient(45deg, #f97316, #facc15);
-            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
-            -webkit-tap-highlight-color: transparent;
-            transition: all 0.3s ease;
-        }
-        .btn-ff:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(249, 115, 22, 0.6);
-        }
-
-        .custom-notice-box {
-            position: relative;
-            padding: 20px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-            border-left: 5px solid #facc15;
+        .tour-img-container {
+            width: 100%;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-bottom: 1px solid rgba(250, 204, 21, 0.1);
         }
-        
-        .custom-notice-box::before {
-            content: 'LIVE';
-            position: absolute;
-            top: 10px;
-            right: -20px;
-            background: #ff0000;
-            color: white;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 2px 30px;
-            transform: rotate(45deg);
-            box-shadow: 0 0 10px #ff0000;
-            animation: pulse-red 2s infinite;
-        }
-
-        @keyframes pulse-red {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .time-badge {
-            display: inline-block;
-            background: rgba(250, 204, 21, 0.15);
-            border: 1px solid #facc15;
-            color: #facc15;
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-family: 'Bebas Neue', cursive;
-            letter-spacing: 1px;
-            font-size: 18px;
-        }
-
-        /* Tournament Section - Detailed View */
-        .tourney-card {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            overflow: hidden;
-            margin-bottom: 30px;
-            transition: 0.3s;
-        }
-        .tourney-img {
+        .tour-img-full {
             width: 100%;
             height: auto;
-            display: block;
-            border-bottom: 2px solid #facc15;
-        }
-        .tourney-details {
-            padding: 20px;
-        }
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .detail-label {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 12px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-        .detail-value {
-            color: #facc15;
-            font-family: 'Bebas Neue', cursive;
-            font-size: 20px;
-            letter-spacing: 1px;
-        }
-        .rules-box {
-            background: rgba(250, 204, 21, 0.05);
-            border: 1px dashed rgba(250, 204, 21, 0.3);
-            border-radius: 12px;
-            padding: 12px;
-            margin-top: 15px;
-        }
-        .rules-title {
-            color: #facc15;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 5px;
+            max-height: 500px;
+            object-fit: contain;
             display: block;
         }
-        .rules-list {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.7);
-            list-style: disc;
-            padding-left: 15px;
-        }
 
-        .wa-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background-color: #25d366;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-
-        @keyframes vibrate {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.05) rotate(1deg); }
-            50% { transform: scale(1) rotate(-1deg); }
-            75% { transform: scale(1.05) rotate(1deg); }
-            100% { transform: scale(1); }
-        }
-
-        .animate-vibrate {
-            animation: vibrate 2s infinite ease-in-out;
-        }
-
-        .mesh-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255,255,255,0.05) 1.5px, transparent 1.5px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .stat-card:hover {
-            border-color: #facc15;
-            transform: scale(1.02);
-        }
-        .stat-icon {
-            font-size: 11px;
-            font-weight: 800;
-            color: #facc15;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
-            display: block;
-        }
-        .stat-value {
-            font-size: 28px;
-            font-weight: 800;
-            color: #fff;
-            font-family: 'Bebas Neue', cursive;
-        }
-
-        .social-pill {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 16px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-        }
-        .social-pill:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #facc15;
-        }
-        .icon-circle {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .cover-rgb-line {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 200% 100%;
-            animation: moveGradient 4s linear infinite;
-        }
-
-        #toast {
-            visibility: hidden;
-            min-width: 180px;
-            background-color: #facc15;
-            color: #000;
-            text-align: center;
-            border-radius: 50px;
-            padding: 10px 20px;
-            position: fixed;
-            z-index: 2000;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-weight: 700;
-        }
-
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.4s ease, fadeout 0.4s ease 2.6s;
-        }
-
-        @keyframes fadein { from { transform: translate(-50%, 20px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
-        @keyframes fadeout { from { transform: translate(-50%, 0); opacity: 1; } to { transform: translate(-50%, 20px); opacity: 0; } }
-
-        /* Registration Modal Styling */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            padding: 20px;
-        }
-        .modal-content {
-            background: #111;
-            border: 2px solid #facc15;
-            border-radius: 30px;
-            width: 100%;
-            max-width: 400px;
-            padding: 30px;
-            box-shadow: 0 0 50px rgba(250, 204, 21, 0.2);
-            position: relative;
-        }
-        .modal-input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 12px 16px;
-            color: white;
-            margin-bottom: 15px;
-            outline: none;
-            transition: 0.3s;
-        }
-        .modal-input:focus {
-            border-color: #facc15;
-            background: rgba(255, 255, 255, 0.1);
-        }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
     <div class="bg-animate"></div>
-    <div class="mesh-overlay"></div>
 
     <!-- Registration Modal -->
-    <div id="registerModal" class="modal-overlay">
-        <div class="modal-content">
-            <h2 class="ff-font text-3xl text-yellow-400 mb-2">Tournament Registration</h2>
-            <p class="text-[11px] text-white/50 uppercase tracking-widest mb-6">Enter details to join the battle</p>
-            
-            <div class="space-y-4">
-                <div>
-                    <label class="text-[10px] text-yellow-400 font-bold uppercase block mb-1">User Name</label>
-                    <input type="text" id="regName" class="modal-input" placeholder="Enter Game Name">
+    <div id="regModal" class="fixed inset-0 z-[2000] flex items-center justify-center px-6 bg-black/90 hidden backdrop-blur-sm">
+        <div class="glass max-w-sm w-full p-8 rounded-[2rem] text-center">
+            <h3 class="bebas text-4xl mb-2 text-yellow-500 italic">Registration Closed</h3>
+            <p class="text-slate-400 text-sm mb-6">Abhi koi seats available nahi hain.</p>
+            <button onclick="closeModal('regModal')" class="w-full bg-white/10 py-4 rounded-2xl font-bold">Theek hai</button>
+        </div>
+    </div>
+
+    <!-- YouTube Subscribe Modal -->
+    <div id="subscribeModal" class="fixed inset-0 z-[2000] flex items-center justify-center px-6 bg-black/95 hidden backdrop-blur-md">
+        <div class="glass max-w-sm w-full p-8 rounded-[2rem] border-red-500/30 text-center">
+            <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029 6.185.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+            </div>
+            <h3 class="bebas text-3xl mb-2 italic">YouTube Subscribe</h3>
+            <p class="text-slate-400 text-xs mb-6 italic">Aage barhne ke liye subscribe karna zaroori hai.</p>
+            <a href="https://www.youtube.com/@Saqib242saqib" target="_blank" onclick="finishSub()" class="block w-full btn-youtube-red py-4 rounded-xl font-black uppercase tracking-widest text-sm mb-4">Subscribe Now</a>
+            <button onclick="closeModal('subscribeModal')" class="text-slate-500 text-[10px] uppercase font-bold underline">Mai ne pehle hi subscribe kiya hai</button>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="relative w-full h-[200px] md:h-[400px] overflow-hidden">
+        <img id="view-cover" src="" class="w-full h-full object-cover opacity-40">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+    </div>
+
+    <div class="relative -mt-16 md:-mt-24 flex flex-col items-center px-4" data-aos="zoom-in">
+        <div class="rgb-ring w-32 h-32 md:w-44 md:h-44">
+            <img id="view-profile" src="" class="w-full h-full object-cover rounded-full border-4 border-black">
+        </div>
+        <h1 id="view-name" class="bebas text-5xl md:text-8xl mt-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-200 italic tracking-tight text-center uppercase">LOADING...</h1>
+        <div class="flex items-center gap-2 bg-yellow-500/10 px-6 py-2 rounded-full border border-yellow-500/20 backdrop-blur-md">
+            <span id="view-uid" class="font-mono font-bold text-yellow-400 text-xs md:text-base italic tracking-widest">---</span>
+        </div>
+    </div>
+
+    <!-- Additional Special Sections -->
+    <div class="max-w-4xl mx-auto px-4 mt-12 space-y-12" id="tour-container"></div>
+    
+    <!-- Additional Sections -->
+    <div class="max-w-4xl mx-auto px-4 mt-12 space-y-12">
+        <!-- Pro Mod Section -->
+        <div class="glass rounded-[2.5rem] overflow-hidden border border-yellow-500/10" data-aos="fade-up">
+            <div class="tour-img-container">
+                <img src="https://ik.imagekit.io/shaban/SHABAN-1768758303706_3WkOuMoSi.jpg" class="tour-img-full" alt="Get Pro Mod">
+            </div>
+            <div class="p-6 md:p-10">
+                <h2 class="bebas text-3xl md:text-5xl italic text-yellow-500 mb-4 uppercase leading-none">GET PRO MOD</h2>
+                <div class="flex gap-2 mb-6">
+                    <span class="bg-yellow-500/10 px-4 py-1.5 rounded-xl text-[10px] font-bold text-yellow-400 border border-yellow-500/10 italic">Exclusive</span>
+                    <span class="bg-yellow-500/10 px-4 py-1.5 rounded-xl text-[10px] font-bold text-yellow-400 border border-yellow-500/10 italic">Premium</span>
                 </div>
-                <div>
-                    <label class="text-[10px] text-yellow-400 font-bold uppercase block mb-1">User UID</label>
-                    <input type="text" id="regUid" class="modal-input" placeholder="Enter Free Fire UID">
+                <div class="bg-black/40 p-5 rounded-2xl border border-yellow-500/5 text-xs text-slate-400 italic mb-8">
+                    Get the best pro modifications for your gaming experience. Enhance your gameplay with premium features and tools.
                 </div>
-                <div>
-                    <label class="text-[10px] text-yellow-400 font-bold uppercase block mb-1">Other Details</label>
-                    <textarea id="regDetails" class="modal-input h-24" placeholder="Squad Name / Role etc."></textarea>
+                <div class="flex items-center justify-center p-4 bg-yellow-500/5 rounded-3xl border border-yellow-500/10">
+                    <button onclick="window.open('https://techai.zone.id/', '_self')" class="w-full btn-gradient py-4 rounded-2xl font-black text-[10px] tracking-widest uppercase shadow-lg">
+                        GET PRO MOD
+                    </button>
                 </div>
-                
-                <div class="flex gap-3">
-                    <button onclick="closeModal()" class="flex-1 py-3 rounded-xl border border-white/10 text-white text-sm font-bold uppercase tracking-wider">Cancel</button>
-                    <button onclick="submitRegistration()" class="flex-[2] btn-ff py-3 rounded-xl text-slate-900 font-bold uppercase tracking-wider">Submit Entry</button>
+            </div>
+        </div>
+
+        <!-- UK Account Section -->
+        <div class="glass rounded-[2.5rem] overflow-hidden border border-yellow-500/10" data-aos="fade-up">
+            <div class="tour-img-container">
+                <img src="https://ik.imagekit.io/shaban/SHABAN-1768758331813_lq1xTnLv7.jpg" class="tour-img-full" alt="Get UK Account">
+            </div>
+            <div class="p-6 md:p-10">
+                <h2 class="bebas text-3xl md:text-5xl italic text-yellow-500 mb-4 uppercase leading-none">GET UK ACCOUNT</h2>
+                <div class="flex gap-2 mb-6">
+                    <span class="bg-yellow-500/10 px-4 py-1.5 rounded-xl text-[10px] font-bold text-yellow-400 border border-yellow-500/10 italic">Premium</span>
+                    <span class="bg-yellow-500/10 px-4 py-1.5 rounded-xl text-[10px] font-bold text-yellow-400 border border-yellow-500/10 italic">Verified</span>
+                </div>
+                <div class="bg-black/40 p-5 rounded-2xl border border-yellow-500/5 text-xs text-slate-400 italic mb-8">
+                    Access premium UK gaming accounts with special features and benefits. Play like a pro with verified accounts.
+                </div>
+                <div class="flex items-center justify-center p-4 bg-yellow-500/5 rounded-3xl border border-yellow-500/10">
+                    <button onclick="window.open('https://techai.zone.id/', '_self')" class="w-full btn-gradient py-4 rounded-2xl font-black text-[10px] tracking-widest uppercase shadow-lg">
+                        GET UK ACCOUNT
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Free Fire Panel & Sensitivity Section -->
+        <div class="glass rounded-[2.5rem] overflow-hidden border border-yellow-500/10" data-aos="fade-up">
+            <div class="tour-img-container">
+                <img src="https://ik.imagekit.io/shaban/SHABAN-1768756872699_rVwiz47cT.jpg" class="tour-img-full" alt="Free Fire Panel & Sensitivity">
+            </div>
+            <div class="p-6 md:p-10">
+                <h2 class="bebas text-3xl md:text-5xl italic text-yellow-500 mb-4 uppercase leading-none">FREE FIRE PANEL & SENSITIVITY</h2>
+                <div class="flex gap-2 mb-6">
+                    <span class="bg-yellow-500/10 px-4 py-1.5 rounded-xl text-[10px] font-bold text-yellow-400 border border-yellow-500/10 italic">Tools</span>
+                    <span class="bg-yellow-500/10 px-4 py-1.5 rounded-xl text-[10px] font-bold text-yellow-400 border border-yellow-500/10 italic">Settings</span>
+                </div>
+                <div class="bg-black/40 p-5 rounded-2xl border border-yellow-500/5 text-xs text-slate-400 italic mb-8">
+                    Get the perfect sensitivity settings and control panel for Free Fire. Optimize your gameplay with professional settings.
+                </div>
+                <div class="flex items-center justify-center p-4 bg-yellow-500/5 rounded-3xl border border-yellow-500/10">
+                    <button onclick="window.open('https://sensitvity.vercel.app/', '_self')" class="w-full btn-gradient py-4 rounded-2xl font-black text-[10px] tracking-widest uppercase shadow-lg">
+                        GET FREE FIRE PANEL & SENSITIVITY
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://chat.whatsapp.com/BmkeKATWZft1xKtMktxggK" target="_blank" class="wa-float animate-vibrate">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.06 3.973L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.601 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
-        <span>JOIN</span>
-    </a>
-
-    <div id="toast">UID COPIED ⚔️</div>
-
-    <div class="w-full min-h-screen relative z-10">
-        <!-- Cover Photo -->
-        <div class="relative h-48 md:h-64 w-full overflow-hidden">
-            <img src="https://ik.imagekit.io/shaban/SHABAN-1768674422775_Uu0TqLuv3.jpg" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-            <div class="cover-rgb-line"></div>
+    <!-- Contact Section -->
+    <div class="max-w-4xl mx-auto px-4 mt-20 mb-24">
+        <div class="text-center mb-10">
+            <h3 class="bebas text-4xl tracking-widest opacity-30 italic">Connect With Me</h3>
+            <div class="h-1 w-12 bg-yellow-600 mx-auto mt-2 rounded-full"></div>
         </div>
-
-        <div class="max-w-screen-md mx-auto px-5 sm:px-8">
-            <!-- Profile Section -->
-            <div class="profile-container flex flex-col items-center sm:items-end sm:flex-row sm:gap-6">
-                <div class="profile-img-wrapper" data-aos="zoom-in">
-                    <img src="https://ik.imagekit.io/shaban/SHABAN-1768674591256_kPMNURVzz.jpg" class="profile-img-circle">
-                </div>
-
-                <div class="mt-4 text-center sm:text-left flex-1" data-aos="fade-up">
-                    <h1 class="text-3xl sm:text-5xl font-bold ff-font tracking-wider text-white">
-                        FREE FIRE <span class="ff-gradient">OFFICIAL</span>
-                    </h1>
-                    <div class="flex items-center justify-center sm:justify-start gap-2 mt-1">
-                        <span class="text-2xl sm:text-3xl font-bold text-yellow-400 tracking-widest uppercase">EMAN</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Action Area -->
-            <div class="mt-10 flex flex-col sm:flex-row gap-4" data-aos="fade-up">
-                <div onclick="copyUID()" class="cursor-pointer active:scale-95 transition-transform bg-white/5 backdrop-blur-md border border-white/10 p-1 pl-6 rounded-2xl flex items-center justify-between min-w-[180px]">
-                    <div class="flex flex-col">
-                        <span class="text-[9px] text-white/50 uppercase font-bold tracking-tighter">UID</span>
-                        <span id="uidText" class="font-mono font-bold text-yellow-400 text-lg">3458769</span>
-                    </div>
-                    <div class="p-3 bg-yellow-400/10 rounded-xl ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6a2 2 0 002-2V7a2 2 0 00-2-2h-6a2 2 0 00-2 2z" /></svg>
-                    </div>
-                </div>
-                
-                <a href="https://wa.me/923478936242?text=Hello%20eman" target="_blank" class="btn-ff flex-1 px-10 py-4 rounded-2xl font-bold text-slate-900 flex items-center justify-center gap-2 text-center">
-                    <span>Message Me</span>
-                </a>
-            </div>
-
-            <!-- Stats Section -->
-            <div class="mt-10 glass-card p-6" data-aos="fade-up">
-                <h3 class="text-xs font-bold text-yellow-400 uppercase tracking-widest mb-5 flex justify-between items-center">Battle Stats <span class="text-white/40">S34</span></h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-icon">Current Rank</span>
-                        <span class="stat-value text-red-500">MASTER</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-icon">Account Level</span>
-                        <span class="stat-value text-yellow-400">Lv. 78</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-icon">Total Likes</span>
-                        <span class="stat-value text-pink-500">12.2K ❤️</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-icon">H.S. Rate</span>
-                        <span class="stat-value text-green-400">85%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Custom Match Notice Box -->
-            <div class="mt-8 custom-notice-box" data-aos="flip-up">
-                <div class="flex items-start gap-4">
-                    <div class="p-3 bg-yellow-400 rounded-2xl shadow-[0_0_15px_#facc15]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000" viewBox="0 0 16 16"><path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/></svg>
-                    </div>
-                    <div class="flex-1">
-                        <h4 class="text-lg font-bold text-white ff-font tracking-wider">UPCOMING CUSTOM MATCH</h4>
-                        <div class="flex flex-wrap gap-4 items-center mt-3">
-                            <div>
-                                <span class="block text-[9px] text-yellow-400 uppercase font-bold mb-1">Match Time</span>
-                                <div class="time-badge">TODAY 12:00 PM</div>
-                            </div>
-                            <div>
-                                <span class="block text-[9px] text-white/50 uppercase font-bold mb-1">Map Detail</span>
-                                <div class="text-white font-bold text-sm tracking-widest uppercase">BERMUDA (4V4)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TOURNAMENT SECTION -->
-            <div class="mt-12" data-aos="fade-up">
-                <h3 class="text-xs font-bold text-indigo-300 uppercase tracking-[0.4em] mb-8 text-center">🏆 TOURNAMENT ARENA 🏆</h3>
-                
-                <!-- Tournament 1 -->
-                <div class="tourney-card">
-                    <img src="https://ik.imagekit.io/shaban/SHABAN-1768747107416_Gfq8n_mIZ.jpg" class="tourney-img" alt="Tournament Card 1">
-                    <div class="tourney-details">
-                        <h4 class="text-xl font-bold text-white ff-font tracking-wide mb-4">Elite Grand Championship</h4>
-                        
-                        <div class="detail-row">
-                            <span class="detail-label">Match Date</span>
-                            <span class="detail-value text-white">JAN 20, 2026</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Match Time</span>
-                            <span class="detail-value">08:00 PM</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Entry Fee</span>
-                            <span class="detail-value text-green-400">RS 1,200</span>
-                        </div>
-
-                        <div class="rules-box">
-                            <span class="rules-title">Match Rules</span>
-                            <ul class="rules-list">
-                                <li>No hack or script (Auto-ban)</li>
-                                <li>Squad registration only</li>
-                                <li>Screenshot must after the match</li>
-                                <li>Be present 10 mins before match starts</li>
-                            </ul>
-                        </div>
-                        <!-- Registration Trigger Button -->
-                        <button onclick="openModal()" class="w-full mt-6 btn-ff py-3 rounded-xl font-bold text-slate-900 uppercase tracking-widest flex items-center justify-center gap-2">
-                            <span>Register Now</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" /></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Tournament 2 -->
-                <div class="tourney-card">
-                    <img src="https://ik.imagekit.io/shaban/SHABAN-1768747098486_wtinqrCOn.jpg" class="tourney-img" alt="Tournament Card 2">
-                    <div class="tourney-details">
-                        <h4 class="text-xl font-bold text-white ff-font tracking-wide mb-4">Squad Battle Royale Pro</h4>
-                        
-                        <div class="detail-row">
-                            <span class="detail-label">Match Date</span>
-                            <span class="detail-value text-white">JAN 22, 2026</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Match Time</span>
-                            <span class="detail-value">09:30 PM</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Entry Fee</span>
-                            <span class="detail-value text-green-400">RS 1,200</span>
-                        </div>
-
-                        <div class="rules-box">
-                            <span class="rules-title">Match Rules</span>
-                            <ul class="rules-list">
-                                <li>Standard Pro League rules apply</li>
-                                <li>No PC players allowed</li>
-                                <li>Map: Bermuda (Full Map)</li>
-                                <li>Minimum Level: 45+</li>
-                            </ul>
-                        </div>
-                        <!-- Registration Trigger Button -->
-                        <button onclick="openModal()" class="w-full mt-6 btn-ff py-3 rounded-xl font-bold text-slate-900 uppercase tracking-widest flex items-center justify-center gap-2">
-                            <span>Register Now</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" /></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Official Channels Section -->
-            <div class="mt-12 space-y-4" data-aos="fade-up">
-                <h3 class="text-xs font-bold text-indigo-300 uppercase tracking-[0.3em] mb-4 px-2">Official Channels</h3>
-                <a href="https://www.instagram.com/mr_saqib242/?igsh=MXVzdnN3aXRzc2U5Zg%3D%3D" target="_blank" class="social-pill">
-                    <div class="icon-circle bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
-                        <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.947.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.947-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.947 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-bold text-white uppercase">Instagram</p>
-                        <p class="text-[10px] text-white/50">@mr_saqib242</p>
-                    </div>
-                </a>
-                <a href="https://www.youtube.com/@Saqib242saqib" target="_blank" class="social-pill">
-                    <div class="icon-circle bg-red-600">
-                        <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 4-8 4z"/></svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-bold text-white uppercase">YouTube</p>
-                        <p class="text-[10px] text-white/50">Saqib 242 Official</p>
-                    </div>
-                </a>
-                <a href="https://www.tiktok.com/@mr_saqib_242?_r=1&_t=ZS-939cWYJd2M0" target="_blank" class="social-pill">
-                    <div class="icon-circle bg-black border border-white/20">
-                        <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.2 2.81-.69 4.14-.52 1.45-1.44 2.81-2.73 3.69-1.28.91-2.84 1.4-4.41 1.4-1.54.03-3.1-.21-4.51-.87-1.44-.64-2.73-1.69-3.65-3.02-1-1.42-1.55-3.14-1.55-4.88 0-1.74.55-3.46 1.55-4.88.92-1.33 2.21-2.38 3.65-3.02 1.41-.66 2.97-.9 4.51-.87 1.15.03 2.3.24 3.37.69v4.32c-.7-.35-1.48-.54-2.27-.55-1.55-.03-3.04.56-4.04 1.76-1.01 1.2-1.42 2.77-1.13 4.3.29 1.53 1.28 2.88 2.68 3.55 1.38.65 3.03.55 4.31-.26 1.27-.81 1.95-2.31 2-3.8V.02z"/></svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-bold text-white uppercase">TikTok</p>
-                        <p class="text-[10px] text-white/50">@mr_saqib_242</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="glass-card p-6 mt-10" data-aos="fade-up">
-                <h3 class="text-xs font-bold text-yellow-400 uppercase tracking-widest mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span> Personal Bio</h3>
-                <p class="text-sm text-indigo-50 leading-relaxed font-medium">Professional Free Fire athlete. I dominate with speed and tactical precision. Catch me in the lobby if you can! ⚔️</p>
-            </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <a href="https://www.youtube.com/@Saqib242saqib" target="_blank" class="glass p-6 rounded-3xl text-center">
+                <div class="w-10 h-10 bg-red-600/20 rounded-xl flex items-center justify-center mx-auto mb-2 text-red-500"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029 6.185.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></div>
+                <p class="text-[8px] font-black uppercase text-slate-400">YouTube</p>
+            </a>
+            <a href="https://www.instagram.com/mr_saqib242/" target="_blank" class="glass p-6 rounded-3xl text-center">
+                <div class="w-10 h-10 bg-pink-600/20 rounded-xl flex items-center justify-center mx-auto mb-2 text-pink-500"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+                <p class="text-[8px] font-black uppercase text-slate-400">Instagram</p>
+            </a>
+            <a href="https://wa.me/923478936242" target="_blank" class="glass p-6 rounded-3xl text-center">
+                <div class="w-10 h-10 bg-green-600/20 rounded-xl flex items-center justify-center mx-auto mb-2 text-green-500"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
+                <p class="text-[8px] font-black uppercase text-slate-400">WhatsApp</p>
+            </a>
+            <a href="https://www.tiktok.com/@mr_saqib_242" target="_blank" class="glass p-6 rounded-3xl text-center">
+                <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-2 text-white"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></div>
+                <p class="text-[8px] font-black uppercase text-slate-400">TikTok</p>
+            </a>
         </div>
+    </div>
 
-        <footer class="mt-20 text-center px-6 pb-28 opacity-40">
-            <p class="text-[10px] text-indigo-300 tracking-[0.4em] uppercase font-bold">Saqib 242 Official • Est. 2026</p>
-        </footer>
+    <!-- Ad Popup -->
+    <div id="promoPopup" class="promo-popup glass p-4 rounded-3xl flex items-center gap-4 shadow-2xl border-white/5">
+        <div id="promoIcon" class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-lg shadow-black/50"></div>
+        <div class="flex-1 min-w-0">
+            <p id="promoTitle" class="bebas text-xl leading-none italic text-white truncate"></p>
+            <p id="promoSub" class="text-[8px] text-slate-500 font-bold uppercase tracking-wider truncate mt-1"></p>
+        </div>
+        <a id="promoLink" href="#" target="_blank" class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase transition-all">Visit</a>
     </div>
 
     <script>
-        AOS.init({ duration: 800, once: true });
-        
-        function copyUID() {
-            const uidText = document.getElementById('uidText').innerText;
-            navigator.clipboard.writeText(uidText);
-            const toast = document.getElementById("toast");
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        const SB_URL = "https://psiypllbqopudppugaxe.supabase.co"; 
+        const SB_KEY = "sb_publishable_PsL-7tSFu4EQU5ZHQgO6UA_Segl7g_e";
+        const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
+
+        let globalRegStatus = 'on';
+        let freeSeats = 0;
+        let pendingUrl = '';
+
+        async function syncData() {
+            try {
+                const { data: settings } = await supabaseClient.from('kashu_settings').select('*').eq('id', 1).single();
+                if (settings) {
+                    document.getElementById('view-name').innerText = settings.name || "KUASHU ARMY";
+                    document.getElementById('view-uid').innerText = settings.uid || "---";
+                    document.getElementById('view-cover').src = settings.cover_url || "";
+                    document.getElementById('view-profile').src = settings.profile_url || "";
+                    globalRegStatus = settings.reg_status || 'on';
+                }
+
+                const { data: auths } = await supabaseClient.from('squad_auth').select('user_id');
+                const { data: assigned } = await supabaseClient.from('payment_users').select('assigned_auth_id').eq('status', 'approved');
+                const { data: filled } = await supabaseClient.from('squad_registrations').select('auth_user_id');
+
+                const assignedIds = assigned ? assigned.map(a => a.assigned_auth_id) : [];
+                const filledIds = filled ? filled.map(f => f.auth_user_id) : [];
+
+                freeSeats = 0;
+                if (auths) {
+                    auths.forEach(s => {
+                        if (!assignedIds.includes(s.user_id) && !filledIds.includes(s.user_id)) freeSeats++;
+                    });
+                }
+
+                const { data: tours } = await supabaseClient.from('kashu_tournaments').select('*').order('id', { ascending: true });
+                const container = document.getElementById('tour-container');
+                container.innerHTML = '';
+
+                tours.forEach(tour => {
+                    const isFull = freeSeats <= 0;
+                    const btnText = globalRegStatus === 'off' ? 'CLOSED' : (isFull ? 'MATCH FULL' : 'REGISTER NOW');
+                    const btnStyle = (globalRegStatus === 'off' || isFull) ? 'bg-white/5 text-slate-600' : 'btn-gradient';
+                    const targetUrl = tour.id === 1 ? 'https://payment-potral-75yt.vercel.app/' : 'https://payment-potral.vercel.app/';
+
+                    container.innerHTML += `
+                        <div class="glass rounded-[2.5rem] overflow-hidden border border-yellow-500/10" data-aos="fade-up">
+                            <div class="tour-img-container">
+                                <img src="${tour.banner_url}" class="tour-img-full" alt="Tournament Banner">
+                            </div>
+                            <div class="p-6 md:p-10">
+                                <h2 class="bebas text-3xl md:text-5xl italic text-yellow-500 mb-4 uppercase leading-none">${tour.name}</h2>
+                                <div class="flex gap-2 mb-6">
+                                    <span class="bg-yellow-500/10 px-4 py-1.5 rounded-xl text-[10px] font-bold text-yellow-400 border border-yellow-500/10 italic">${tour.time}</span>
+                                    <span class="bg-yellow-500/10 px-4 py-1.5 rounded-xl text-[10px] font-bold text-yellow-400 border border-yellow-500/10 italic">${tour.date}</span>
+                                </div>
+                                <div class="bg-black/40 p-5 rounded-2xl border border-yellow-500/5 text-xs text-slate-400 italic mb-8">
+                                    ${tour.rules ? tour.rules.replace(/\n/g, '<br>') : 'Official Tournament Rules Apply.'}
+                                </div>
+                                <div class="flex items-center justify-between gap-4 p-4 bg-yellow-500/5 rounded-3xl border border-yellow-500/10">
+                                    <div class="text-center flex-1">
+                                        <span class="bebas text-4xl text-white block leading-none">${freeSeats}</span>
+                                        <span class="text-[8px] font-black uppercase tracking-widest text-slate-500">Slots Left</span>
+                                    </div>
+                                    <button onclick="handleBtnClick('${targetUrl}')" class="flex-[2] ${btnStyle} py-4 rounded-2xl font-black text-[10px] tracking-widest uppercase shadow-lg">
+                                        ${btnText}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (err) { console.error(err); }
         }
 
-        // Modal Functions
-        function openModal() {
-            document.getElementById('registerModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent scroll
-        }
-
-        function closeModal() {
-            document.getElementById('registerModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scroll
-        }
-
-        function submitRegistration() {
-            const name = document.getElementById('regName').value;
-            const uid = document.getElementById('regUid').value;
-            const details = document.getElementById('regDetails').value;
-
-            if(!name || !uid) {
-                alert("Please enter Name and UID!");
-                return;
+        function handleBtnClick(url) {
+            if (globalRegStatus === 'off') {
+                document.getElementById('regModal').classList.remove('hidden');
+            } else if (freeSeats > 0) {
+                pendingUrl = url;
+                document.getElementById('subscribeModal').classList.remove('hidden');
             }
-
-            // Formatting Message for WhatsApp
-            const message = `🏆 *TOURNAMENT REGISTRATION*%0A%0A👤 *Name:* ${name}%0A🆔 *UID:* ${uid}%0A📝 *Details:* ${details}`;
-            
-            // Redirecting to WhatsApp
-            const waUrl = `https://wa.me/923478936242?text=${message}`;
-            window.open(waUrl, '_blank');
-            
-            // Close modal after redirection
-            closeModal();
         }
+
+        function finishSub() {
+            setTimeout(() => { window.location.href = pendingUrl; }, 1500);
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Updated Ads with Specific Links including tech website
+        const ads = [
+            { 
+                title: "INSTAGRAM", 
+                sub: "Follow for Highlights", 
+                icon: "📸", 
+                bg: "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600", 
+                link: "https://www.instagram.com/mr_saqib242/" 
+            },
+            { 
+                title: "TIKTOK", 
+                sub: "Check New Content", 
+                icon: "🎵", 
+                bg: "bg-black", 
+                link: "https://www.tiktok.com/@mr_saqib_242" 
+            },
+            { 
+                title: "TECH WEBSITE", 
+                sub: "Visit Technical Site", 
+                icon: "💻", 
+                bg: "bg-blue-600", 
+                link: "https://techai.zone.id/" 
+            },
+            { 
+                title: "GIVEAWAY LIVE", 
+                sub: "Win Diamonds on YT", 
+                icon: "💎", 
+                bg: "bg-red-600", 
+                link: "https://www.youtube.com/@Saqib242saqib" 
+            }
+        ];
+        
+        let adIndex = 0;
+        function rotateAds() {
+            const popup = document.getElementById('promoPopup');
+            const data = ads[adIndex];
+            popup.classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('promoTitle').innerText = data.title;
+                document.getElementById('promoSub').innerText = data.sub;
+                document.getElementById('promoIcon').innerText = data.icon;
+                document.getElementById('promoIcon').className = `w-12 h-12 rounded-2xl flex items-center justify-center text-white ${data.bg} shadow-lg`;
+                document.getElementById('promoLink').href = data.link;
+                popup.classList.add('active');
+                adIndex = (adIndex + 1) % ads.length;
+            }, 600);
+        }
+
+        window.onload = () => {
+            AOS.init({ duration: 800, once: true });
+            syncData();
+            setInterval(syncData, 10000);
+            setTimeout(() => { rotateAds(); setInterval(rotateAds, 8000); }, 2000);
+        };
     </script>
 </body>
 </html>
